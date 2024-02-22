@@ -21,7 +21,7 @@ spec:
       containers:
       - name: catalogue
         imagePullPolicy: Always
-        image: "techworldwithsiva/catalogue:{{ .Values.deployment.imageVersion }}"
+        image: "shafivullashaik/catalogue:{{ .Values.deployment.imageVersion }}"
         envFrom:
         - configMapRef:
             name: catalogue-config
