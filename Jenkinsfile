@@ -61,21 +61,19 @@ environment{
             }
         }
     stage('Deployment'){
-            steps{
-                script{
-                    withAWS(credentials: 'aws-auth', region: "${REGION}") {
-                        sh """
-                        aws eks update-kubeconfig --region ${REGION} --name spot-cluster
-                        cd helm
-                        helm install catalogue . --set deployment.imageVersion=$(grep '^deployment\.imageVersion:' chat.yaml | awk '{print $2}')
-                        """
-                        
-                        
-                    }
+        steps{
+            script{
+                withAWS(credentials: 'aws-auth', region: "${REGION}") {
+                    sh """
+                    aws eks update-kubeconfig --region ${REGION} --name spot-cluster
+                    cd helm
+                    helm uninstall catalogue || true  # Uninstall existing release if present
+                    helm install catalogue . --set deployment.imageVersion=$(grep '^deployment\.imageVersion:' chat.yaml | awk '{print $2}')
+                    """
                 }
             }
         }
-  
+    }
 
-}
+  }
 }
