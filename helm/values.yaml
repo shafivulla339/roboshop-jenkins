@@ -3,3 +3,5 @@ deployment:
   imageVersion: latest
 service:
   port: 80
+Chart:
+  appVersion: latest
