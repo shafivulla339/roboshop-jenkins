@@ -67,7 +67,7 @@ environment{
                     sh """
                     aws eks update-kubeconfig --region ${REGION} --name spot-cluster
                     cd helm
-                    helm install catalogue . --set deployment.imageVersion=${$(grep '^deployment\.imageVersion:' chat.yaml | awk '{print $2}')}
+                    helm install catalogue . --set deployment.imageVersion=${grep '^deployment\.imageVersion:' chat.yaml | awk '{print $2}'}
                     """
                 }
             }
