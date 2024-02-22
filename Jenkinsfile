@@ -67,8 +67,7 @@ environment{
                         sh """
                         aws eks update-kubeconfig --region ${REGION} --name spot-cluster
                         cd helm
-                        helm uninstall catalogue || true  # Uninstall existing release if present
-                        helm install catalogue . --set deployment.imageVersion=${params.VERSION} || (echo "Installation failed: cannot re-use a name that is still in use" && exit 1)
+                        helm install catalogue . --set deployment.imageVersion=$(grep '^deployment\.imageVersion:' chat.yaml | awk '{print $2}')
                         """
                         
                         
