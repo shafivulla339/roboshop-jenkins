@@ -67,7 +67,7 @@ environment{
                     sh """
                     aws eks update-kubeconfig --region ${REGION} --name spot-cluster
                     cd helm
-                    helm upgrade catalogue . --namespace roboshop --set deployment.imageVersion=${VERSION} --set appVersion=${VERSION}"
+                    helm upgrade catalogue . --namespace roboshop --set deployment.imageVersion=${VERSION} --set appVersion=${VERSION}
                     """
                 }
             }
