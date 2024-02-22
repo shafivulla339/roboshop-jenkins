@@ -65,7 +65,7 @@ environment{
             script{
                 withAWS(credentials: 'aws-auth', region: "${REGION}") {
                     sh """
-                    aws eks update-kubeconfig --region ${REGION} --name spot-cluster
+                    aws eks update-kubeconfig --region \${REGION} --name spot-cluster
                     cd helm
                     helm install catalogue . --set deployment.imageVersion=$(sh(script: "grep '^deployment\\.imageVersion:' chat.yaml | awk '{print \$2}'", returnStdout: true).trim())
                     """
