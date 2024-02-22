@@ -4,4 +4,4 @@ deployment:
 service:
   port: 80
 Chart:
-  appVersion: latest
+  appVersion: 1.2.1
