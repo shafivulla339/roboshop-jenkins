@@ -69,6 +69,16 @@ environment{
                         cd helm
                         helm install catalogue . --set deployment.imageVersion=${VERSION}
                         """
+                        // Check if the installation failed
+                        def installStatus = sh(script: "helm list | grep catalogue", returnStatus: true)
+                        if (installStatus != 0) {
+                            echo "Installation failed: cannot re-use a name that is still in use"
+                            // Handle this error condition as per your requirements
+                            // For example, you can uninstall the existing release or choose a different name and retry
+                            // sh "helm uninstall <existing_release_name>"
+                            // sh "helm install <new_release_name> . --set deployment.imageVersion=${VERSION}"
+                }
+                        
                     }
                 }
             }
